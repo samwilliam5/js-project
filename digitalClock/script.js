@@ -12,7 +12,20 @@ const clockRun = () =>{
 
 };
 
+
 setInterval(clockRun,1000);
 
+const fetched = async () =>{
+    const response = await fetch('https://jsonplaceholder.typicode.com/todos/');
+    console.log(response);
+    if(response.status !== 200){
+      throw new Error('Failed to fetch');
+    }
+    const data = await response.json();
+    return data;
+};
 
+fetched()
+.then(data => console.log(data))
+.catch(err => console.log(err.message));
 
